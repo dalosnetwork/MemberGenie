@@ -1,7 +1,7 @@
 import sqlite3
 
 class SQL():
-    def __init__():
+    def __init__(self):
         conn = sqlite3.connect('managenie.db')
         cursor = conn.cursor()
         cursor.execute('''
