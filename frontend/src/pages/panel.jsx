@@ -47,7 +47,7 @@ const Panel = () => {
     if(wallet){
       handleCheckIsPayed();
     } 
-  },[wallet, temp]);
+  },[]);
 
   const handlePlatformNameChange = (e) => {
     setPlatformName(e.target.value);
@@ -74,9 +74,14 @@ const Panel = () => {
       const data = await isPayed(wallet);
       console.log(data);
       if (data === true) {
-        sessionStorage.setItem("blur", false);
-        window.location.reload();
-        handleCheckSystemWallet();
+        if(sessionStorage.getItem("blur")==="true"){
+          sessionStorage.setItem("blur", "false");
+          window.location.reload();
+          handleCheckSystemWallet();
+        }
+        else{
+          handleCheckSystemWallet();
+        }
       } else {
 
       }
