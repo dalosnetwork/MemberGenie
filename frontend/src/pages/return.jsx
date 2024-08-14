@@ -38,7 +38,7 @@ const Return = () => {
   useEffect(()=>{
     handlePaymentDone()
     dispatch(getWalletAdress());
-    navigate("/panel")
+    navigate("/")
   })
 
 };

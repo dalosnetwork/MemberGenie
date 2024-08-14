@@ -51,7 +51,7 @@ const Decks = () => {
                 <p className="text">Streamline your payment process with <span className="bold">seamless, 
                 automated subscriptions. Set it once </span>and enjoy <span className="bold">hassle-free payments</span>, 
                 directly to your wallet, <span className="bold">whenever you choose.</span></p>
-                <button className="button1" onClick={connectWallet}>Connect Wallet</button>
+                <button className="button1" onClick={connectWallet}>Launch App</button>
                 <div className="d-flex">
                   <img className="warn" src={warn} alt="" />
                   <p className="info ms-2 my-auto">Link the wallet used for your service to easily<br/> set up automated subscription payments</p>

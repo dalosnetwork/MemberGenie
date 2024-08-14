@@ -47,7 +47,6 @@ const Panel = () => {
   useEffect(() => {
     if(wallet){
       handleCheckIsPayed();
-      setDeneme(true);
     } 
   },[wallet, temp]);
 
@@ -78,7 +77,7 @@ const Panel = () => {
       if (data === true) {
         sessionStorage.setItem("blur", false);
         handleCheckSystemWallet();
-        setDeneme(true)
+        
       } else {
 
       }
@@ -316,7 +315,7 @@ const Panel = () => {
       );
 
       const result = await contract.GetIsSystemWallet(wallet);
-      setTemp(result);
+      console.log(result, "CHECK SYSTEM WALLET")
     } catch (error) {
       console.error("Error:", error);
     }
@@ -354,6 +353,7 @@ const Panel = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    setDeneme(true)
   };
 
 
