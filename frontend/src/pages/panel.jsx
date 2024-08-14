@@ -40,14 +40,16 @@ const Panel = () => {
   const [paymentFrequency, setPaymentFrequency] = useState("");
 
   const [temp, setTemp] = useState(false);
+  const [deneme, setDeneme] = useState(false);
 
   const { wallet } = useSelector((state) => state.wallet);
 
   useEffect(() => {
     if(wallet){
       handleCheckIsPayed();
+      setDeneme(true);
     } 
-  },[]);
+  },[wallet, temp]);
 
   const handlePlatformNameChange = (e) => {
     setPlatformName(e.target.value);
@@ -74,14 +76,9 @@ const Panel = () => {
       const data = await isPayed(wallet);
       console.log(data);
       if (data === true) {
-        if(sessionStorage.getItem("blur")==="true"){
-          sessionStorage.setItem("blur", "false");
-          window.location.reload();
-          handleCheckSystemWallet();
-        }
-        else{
-          handleCheckSystemWallet();
-        }
+        sessionStorage.setItem("blur", false);
+        handleCheckSystemWallet();
+        setDeneme(true)
       } else {
 
       }
@@ -500,7 +497,7 @@ const Panel = () => {
               </div>
 
               <div className="col-12 d-flex justify-content-center mt-5">
-                {temp ? (
+                {deneme ? (
                   <>
                     <div
                       className="row d-flex justify-content-center"
@@ -544,7 +541,7 @@ const Panel = () => {
                   </>
                 )}
               </div>
-              {temp ? (<>
+              {deneme ? (<>
                 <div className="col-12">
                   <p className="text2">
                     Use the code below to integrade the subscription system to
