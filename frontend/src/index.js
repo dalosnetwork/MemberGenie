@@ -10,6 +10,7 @@ import Panel from "./pages/panel.jsx"
 import { Provider } from 'react-redux';
 import store from './redux/app/store.js';
 import List from './pages/list.jsx';
+import Return from './pages/return.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/list",
     element: <List/>
+  },
+  {
+    path: "/payment_done",
+    element: <Return/>
   },
 ]);
 

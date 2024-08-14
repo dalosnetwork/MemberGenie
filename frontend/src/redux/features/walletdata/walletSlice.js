@@ -14,7 +14,6 @@ export const getWalletAdress = createAsyncThunk('wallet/getWalletAdress', async(
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     const _walletAddress = await signer.getAddress();
-    console.log("ryewyrwr")
     return _walletAddress;
   } else {
     throw new Error('No Ethereum provider found');
