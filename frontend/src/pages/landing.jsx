@@ -21,6 +21,7 @@ const Decks = () => {
   const { wallet, status, error } = useSelector((state) => state.wallet);
 
   const connectWallet = async () => {
+    sessionStorage.setItem("blur", true)
     dispatch(getWalletAdress());
     navigate("/panel")
   };

@@ -33,7 +33,6 @@ const Panel = () => {
 
   const CONTRACT_ADDRESS = "0x8c0C5af8a0Ef0550B3C6ad4C1F7Bc6D86F1b506A";
 
-  const [blur, setBlur] = useState(true);
 
   const [platformName, setPlatformName] = useState("");
   const [acceptedToken, setAcceptedToken] = useState("");
@@ -47,7 +46,7 @@ const Panel = () => {
   useEffect(() => {
     if(wallet){
       handleCheckIsPayed();
-    }
+    } 
   },[wallet, temp]);
 
   const handlePlatformNameChange = (e) => {
@@ -75,7 +74,7 @@ const Panel = () => {
       const data = await isPayed(wallet);
       console.log(data);
       if (data === true) {
-        setBlur(false);
+        sessionStorage.setItem("blur", false);
         handleCheckSystemWallet();
       } else {
 
@@ -365,7 +364,7 @@ const Panel = () => {
 
   return (
     <>
-      <div className={`overlay ${blur ? "show" : ""}`}>
+      <div className={`overlay ${sessionStorage.getItem("blur") ? "show" : ""}`}>
         <div className="modalContent">
           <img
             className="cancel"
