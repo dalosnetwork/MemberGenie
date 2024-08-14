@@ -73,8 +73,8 @@ const Panel = () => {
       const data = await isPayed(wallet);
       console.log(data);
       if (data === true) {
-        handleCheckSystemWallet();
         setBlur(false);
+        handleCheckSystemWallet();
       } else {
         setBlur(true);
       }
@@ -345,6 +345,7 @@ const Panel = () => {
 
       console.log("Transaction sent. Waiting for confirmation...");
       await tx.wait();
+      window.location.reload(); 
       console.log("Membership system created successfully!");
     } catch (error) {
       console.error("Error:", error);
