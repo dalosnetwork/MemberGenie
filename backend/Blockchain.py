@@ -5,7 +5,7 @@ class Blockchain:
     def __init__(self):
         # Ortam değişkenlerinden bilgileri alıyoruz
         self.wallet_address = os.getenv('WALLET_ADDRESS', '0xE1bBA68d94f7Bd1aD4e360830A03Dce78bD4B536')
-        self.contract_address = os.getenv('CONTRACT_ADDRESS', '0xD017bB71EEe19a92aAA68BE3cEe3EEFA87CECE41')
+        self.contract_address = os.getenv('CONTRACT_ADDRESS', '0x8c0C5af8a0Ef0550B3C6ad4C1F7Bc6D86F1b506A')
         self.private_key = os.getenv('PRIVATE_KEY', 'eeda054b61ca069725b61dd56004bb08b0f90ae6ccfc1a85b75e69bfa58b77f1')
         
         # Web3 bağlantısını kuruyoruz
