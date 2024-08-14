@@ -40,7 +40,9 @@ const Panel = () => {
 
   const [temp, setTemp] = useState(false);
   const [deneme, setDeneme] = useState(false);
-  const [isBlurred, setIsBlurred] = useState(sessionStorage.getItem("blur") === "true"); // Initialize state based on sessionStorage
+  const [isBlurred, setIsBlurred] = useState(sessionStorage.getItem("blur") === "true");
+
+  const [isOpen, setIsOpen] = useState(sessionStorage.getItem("open"));
 
   const { wallet } = useSelector((state) => state.wallet);
 
@@ -65,6 +67,7 @@ const Panel = () => {
     setPlatformName(e.target.value);
     console.log(e.target.value);
   };
+  
   const react = `
   //PLEASE IMPORT ETHER JS AT THE TOP OF THE FILE
   import { ethers } from "ethers";
@@ -326,7 +329,10 @@ const Panel = () => {
       );
 
       const result = await contract.GetIsSystemWallet(wallet);
-      console.log(result, "CHECK SYSTEM WALLET")
+      if(result===true){
+        sessionStorage.setItem("open", "true");
+        setIsOpen(true); // Update state
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -361,10 +367,11 @@ const Panel = () => {
       await tx.wait();
       window.location.reload(); 
       console.log("Membership system created successfully!");
+      sessionStorage.setItem("open","true")
+      setIsOpen(sessionStorage.getItem("open") === "true");
     } catch (error) {
       console.error("Error:", error);
     }
-    setDeneme(true);
   };
 
   const handleStripe = async () => {
@@ -498,7 +505,7 @@ const Panel = () => {
               </div>
 
               <div className="col-12 d-flex justify-content-center mt-5">
-                {deneme ? (
+                {isOpen ? (
                   <>
                     <div
                       className="row d-flex justify-content-center"
@@ -542,7 +549,7 @@ const Panel = () => {
                   </>
                 )}
               </div>
-              {deneme ? (<>
+              {isOpen ? (<>
                 <div className="col-12">
                   <p className="text2">
                     Use the code below to integrate the subscription system to

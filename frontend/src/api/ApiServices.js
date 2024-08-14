@@ -7,7 +7,6 @@ export const isPayed = async (walletAddress) => {
     const response = await axios.get(`${BASE_URL}/is_payed`, {
       params: { walletAddress },
     });
-    console.log(response.data.data)
     if (response) {
       console.log(response)
       return response.data.data;
