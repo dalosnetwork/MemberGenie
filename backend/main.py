@@ -20,14 +20,14 @@ app.add_middleware(
 @app.get("/is_payed")
 def is_payed(walletAddress: str):
     result = controller.is_payed(walletAddress)
-    print(result)
+    
     return {"data": result}
 
 @app.post("/payment_done")
 async def payment_done(request: Request):
     body = await request.json()
     walletAddress = body.get("walletAddress")
-
+    
     if not walletAddress:
         raise HTTPException(status_code=400, detail="walletAddress is required")
 
