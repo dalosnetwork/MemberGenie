@@ -20,13 +20,15 @@ const Return = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { wallet } = useSelector((state) => state.wallet);
-  
+  const tempaddress = sessionStorage.getItem("temp")
+
   const handlePaymentDone = async () => {
     try {
-      const data = await paymentDone(wallet);
+      const data = await paymentDone(tempaddress);
       if (data) {
         console.log("Payment status updated successfully");
         console.log(data.message);
+        sessionStorage.setItem("temp","")
       } else {
         console.log("Failed to update payment status");
         console.log("Failed to update payment status");

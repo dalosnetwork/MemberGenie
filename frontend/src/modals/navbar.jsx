@@ -24,21 +24,6 @@ const Navbar = () => {
     }
   }, [status, wallet, error]);
 
-  const handlePaymentDone = async () => {
-    try {
-      const data = await paymentDone(wallet);
-      if (data) {
-        console.log("Payment status updated successfully");
-        console.log(data.message);
-      } else {
-        console.log("Failed to update payment status");
-        console.log("Failed to update payment status");
-      }
-    } catch (error) {
-      console.error("Error updating payment status:", error);
-      console.log("Error updating payment status");
-    }
-  };
 
   const truncate = (str) => {
     if (str.length <= 10) {

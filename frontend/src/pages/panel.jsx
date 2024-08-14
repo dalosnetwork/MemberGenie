@@ -74,6 +74,7 @@ const Panel = () => {
       console.log(data);
       if (data === false) {
         handleCheckSystemWallet();
+        setBlur(false);
       } else {
         setBlur(true);
       }
@@ -351,34 +352,6 @@ const Panel = () => {
   };
 
 
-
-  /*   const handleAddNewMember = async () => {
-
-    const MEMBER_GENIE_ABI = [
-        "function addNewMember(address _systemWallet) public returns (bool)"
-    ];
-
-    try {
-        if (typeof window.ethereum === 'undefined') {
-            throw new Error('MetaMask is not installed');
-        }
-
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-
-        const contract = new ethers.Contract(CONTRACT_ADDRESS, MEMBER_GENIE_ABI, signer);
-        const tx = await contract.addNewMember("0x026961474a29E075F1b94e2876579590d89c43b3");
-
-        console.log('Transaction sent. Waiting for confirmation...');
-        await tx.wait();
-        console.log('New member added successfully!');
-    } catch (error) {
-        console.error('Error:', error);
-    }
-  };
- */
 
   //USERA VERİLECEK
 
