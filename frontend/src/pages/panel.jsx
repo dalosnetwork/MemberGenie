@@ -45,7 +45,9 @@ const Panel = () => {
   const { wallet } = useSelector((state) => state.wallet);
 
   useEffect(() => {
-    handleCheckIsPayed();
+    if(wallet){
+      handleCheckIsPayed();
+    }
   },[wallet, temp]);
 
   const handlePlatformNameChange = (e) => {
@@ -76,7 +78,7 @@ const Panel = () => {
         setBlur(false);
         handleCheckSystemWallet();
       } else {
-        setBlur(true);
+
       }
     } catch (error) {
       console.log("Error retrieving payment status");
