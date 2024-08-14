@@ -45,8 +45,8 @@ class Blockchain:
             # addPayedWallet fonksiyonu için işlem oluşturun
             transaction = contract.functions.addPayedWallet(systemWallet).build_transaction({
                 'chainId': 421614,  # Arbitrum Sepolia Testnet için chainId 42170
-                'gas': 2000000,
-                'gasPrice': self.web3.to_wei('10', 'gwei'),  # Gas price, test ağları için düşük tutun
+                'gas': 3000000,
+                'gasPrice': self.web3.to_wei('5', 'gwei'),  # Gas price, test ağları için düşük tutun
                 'nonce': nonce,
             })
 
