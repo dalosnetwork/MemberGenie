@@ -33,7 +33,6 @@ const Panel = () => {
 
   const CONTRACT_ADDRESS = "0x8c0C5af8a0Ef0550B3C6ad4C1F7Bc6D86F1b506A";
 
-
   const [platformName, setPlatformName] = useState("");
   const [acceptedToken, setAcceptedToken] = useState("");
   const [amountPerTransaction, setAmountPerTransaction] = useState("");
@@ -41,51 +40,31 @@ const Panel = () => {
 
   const [temp, setTemp] = useState(false);
   const [deneme, setDeneme] = useState(false);
+  const [isBlurred, setIsBlurred] = useState(sessionStorage.getItem("blur") === "true"); // Initialize state based on sessionStorage
 
   const { wallet } = useSelector((state) => state.wallet);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsBlurred(sessionStorage.getItem("blur") === "true");
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     if(wallet){
       handleCheckIsPayed();
     } 
   },[wallet, temp]);
-
+  
   const handlePlatformNameChange = (e) => {
     setPlatformName(e.target.value);
     console.log(e.target.value);
   };
-
-  const handleAcceptedTokenClick = (token) => {
-    setAcceptedToken(token);
-    console.log(token);
-  };
-
-  const handleAmountChange = (e) => {
-    setAmountPerTransaction(e.target.value);
-    console.log(e.target.value);
-  };
-
-  const handleFrequencyChange = (e) => {
-    setPaymentFrequency(e.target.value);
-    console.log(e.target.value);
-  };
-
-  const handleCheckIsPayed = async () => {
-    try {
-      const data = await isPayed(wallet);
-      console.log(data);
-      if (data === true) {
-        sessionStorage.setItem("blur", false);
-        handleCheckSystemWallet();
-        
-      } else {
-
-      }
-    } catch (error) {
-      console.log("Error retrieving payment status");
-    }
-  };
-
   const react = `
   //PLEASE IMPORT ETHER JS AT THE TOP OF THE FILE
   import { ethers } from "ethers";
@@ -290,6 +269,38 @@ const Panel = () => {
   };
         `;
 
+  const handleAcceptedTokenClick = (token) => {
+    setAcceptedToken(token);
+    console.log(token);
+  };
+
+  const handleAmountChange = (e) => {
+    setAmountPerTransaction(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleFrequencyChange = (e) => {
+    setPaymentFrequency(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleCheckIsPayed = async () => {
+    try {
+      const data = await isPayed(wallet);
+      console.log(data);
+      if (data === true) {
+        sessionStorage.setItem("blur", "false");
+        handleCheckSystemWallet();
+      } 
+      else if(data === false) {
+        sessionStorage.setItem("blur", "true");
+      }
+      setIsBlurred(sessionStorage.getItem("blur") === "true"); // Update state after sessionStorage change
+    } catch (error) {
+      console.log("Error retrieving payment status");
+    }
+  };
+
   const handleCheckSystemWallet = async () => {
     const MEMBER_GENIE_ABI = [
       "function GetIsSystemWallet(address) public view returns (bool)",
@@ -353,12 +364,8 @@ const Panel = () => {
     } catch (error) {
       console.error("Error:", error);
     }
-    setDeneme(true)
+    setDeneme(true);
   };
-
-
-
-  //USERA VERİLECEK
 
   const handleStripe = async () => {
     sessionStorage.setItem("temp", wallet);
@@ -367,7 +374,7 @@ const Panel = () => {
 
   return (
     <>
-      <div className={`overlay ${sessionStorage.getItem("blur") === "true" ? "show" : ""}`}>
+      <div className={`overlay ${isBlurred ? "show" : ""}`}>
         <div className="modalContent">
           <img
             className="cancel"
@@ -386,12 +393,6 @@ const Panel = () => {
       </div>
       <Navbar />
       <>
-{/*         <button onClick={() => handleCheckSystemWallet()}>DENEME</button>
-        <button onClick={() => handleCreateMembershipSystem()}>
-          create membership system
-        </button>
-        <button onClick={() => handleWithdraw()}>WITHDRAW</button>
-        <button onClick={() => handleGetMember()}>member</button> */}
         <div id="panel">
           <div className="container">
             <div className="row d-flex justify-content-center">
@@ -544,7 +545,7 @@ const Panel = () => {
               {deneme ? (<>
                 <div className="col-12">
                   <p className="text2">
-                    Use the code below to integrade the subscription system to
+                    Use the code below to integrate the subscription system to
                     your service:
                   </p>
                   <div className="row">
@@ -627,12 +628,8 @@ const Panel = () => {
                   <div></div>
                 </div>              
               </>):(<>
-              
-
               </>)
-
               }
-
             </div>
           </div>
         </div>
@@ -642,3 +639,4 @@ const Panel = () => {
 };
 
 export default Panel;
+

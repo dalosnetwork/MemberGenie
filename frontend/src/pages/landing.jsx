@@ -24,10 +24,7 @@ const Decks = () => {
     dispatch(getWalletAdress());
     navigate("/panel")
   };
-  
-  useEffect(()=>{
-    sessionStorage.setItem("blur", true)
-  },[])
+
   useEffect(() => {
     if (status === 'succeeded' && wallet) {
       console.log('Wallet connected:', wallet);
