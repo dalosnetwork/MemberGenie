@@ -67,7 +67,7 @@ const Panel = () => {
     setPlatformName(e.target.value);
     console.log(e.target.value);
   };
-  
+
   const react = `
   //PLEASE IMPORT ETHER JS AT THE TOP OF THE FILE
   import { ethers } from "ethers";
@@ -442,40 +442,40 @@ const Panel = () => {
                     </button>
                     <button
                       className={`button ${
-                        acceptedToken === "TOKEN2" ? "active" : ""
+                        acceptedToken === "USDC" ? "active" : ""
                       }`}
                       onClick={() =>
-                        acceptedToken === "TOKEN2"
+                        acceptedToken === "USDC"
                           ? setAcceptedToken("")
-                          : handleAcceptedTokenClick("TOKEN2")
+                          : handleAcceptedTokenClick("USDC")
                       }
                     >
-                      {acceptedToken === "TOKEN2" ? (
+                      {acceptedToken === "USDC" ? (
                         <>
-                          TOKEN2
+                          USDC
                           <img className={"cancel"} src={cancel} alt="" />
                         </>
                       ) : (
-                        <>TOKEN2</>
+                        <>USDC</>
                       )}
                     </button>
                     <button
                       className={`button ${
-                        acceptedToken === "TOKEN3" ? "active" : ""
+                        acceptedToken === "DAI" ? "active" : ""
                       }`}
                       onClick={() =>
-                        acceptedToken === "TOKEN3"
+                        acceptedToken === "DAI"
                           ? setAcceptedToken("")
-                          : handleAcceptedTokenClick("TOKEN3")
+                          : handleAcceptedTokenClick("DAI")
                       }
                     >
-                      {acceptedToken === "TOKEN3" ? (
+                      {acceptedToken === "DAI" ? (
                         <>
-                          TOKEN3
+                          DAI
                           <img className={"cancel"} src={cancel} alt="" />
                         </>
                       ) : (
-                        <>TOKEN3</>
+                        <>DAI</>
                       )}
                     </button>
                   </span>
