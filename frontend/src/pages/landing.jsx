@@ -17,7 +17,7 @@ const Decks = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setModalOpen] = useState(false);
- 
+
   const { wallet, status, error } = useSelector((state) => state.wallet);
   
   const connectWallet = async () => {

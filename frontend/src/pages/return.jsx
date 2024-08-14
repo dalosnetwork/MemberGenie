@@ -27,15 +27,11 @@ const Return = () => {
       const data = await paymentDone(tempaddress);
       if (data) {
         console.log("Payment status updated successfully");
-        console.log(data.message);
-        sessionStorage.setItem("temp","")
       } else {
-        console.log("Failed to update payment status");
         console.log("Failed to update payment status");
       }
     } catch (error) {
       console.error("Error updating payment status:", error);
-      console.log("Error updating payment status");
     }
   };
 

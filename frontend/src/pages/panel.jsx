@@ -75,6 +75,7 @@ const Panel = () => {
       console.log(data);
       if (data === true) {
         sessionStorage.setItem("blur", false);
+        window.location.reload();
         handleCheckSystemWallet();
       } else {
 
@@ -364,7 +365,7 @@ const Panel = () => {
 
   return (
     <>
-      <div className={`overlay ${sessionStorage.getItem("blur") ? "show" : ""}`}>
+      <div className={`overlay ${sessionStorage.getItem("blur") === "true" ? "show" : ""}`}>
         <div className="modalContent">
           <img
             className="cancel"
