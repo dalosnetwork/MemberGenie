@@ -1,5 +1,7 @@
 from SQL import SQL
+from Blockchain import Blockchain
 
+Blockchain = Blockchain()
 SQL = SQL()
 
 class Controller():
@@ -9,6 +11,11 @@ class Controller():
         return result
 
     def payment_done(self, walletAddress):
-        result = SQL.payment_done(walletAddress)
+        addPayed = Blockchain.add_payed(walletAddress)
+        
+        if addPayed:
+            result = SQL.payment_done(walletAddress)
 
-        return result
+            return result
+        else:
+            return False

@@ -14,7 +14,7 @@ class SQL():
         conn.close()
 
     def is_payed(self, walletAddress):
-        conn = sqlite3.connect('payments.db')
+        conn = sqlite3.connect('managenie.db')
         cursor = conn.cursor()
         cursor.execute("SELECT payed FROM is_payed WHERE walletAddress = ?", (walletAddress,))
         result = cursor.fetchone()
@@ -33,7 +33,17 @@ class SQL():
         conn = sqlite3.connect('managenie.db')
         cursor = conn.cursor()
 
-        cursor.execute("UPDATE is_payed SET payed = 1 WHERE walletAddress = ?", (walletAddress,))
+        # İlk olarak, cüzdan adresinin mevcut olup olmadığını kontrol edin
+        cursor.execute("SELECT payed FROM is_payed WHERE walletAddress = ?", (walletAddress,))
+        result = cursor.fetchone()
+
+        if result:
+            # Cüzdan adresi varsa, güncelleme yapın
+            cursor.execute("UPDATE is_payed SET payed = 1 WHERE walletAddress = ?", (walletAddress,))
+        else:
+            # Cüzdan adresi yoksa, yeni bir kayıt ekleyin
+            cursor.execute("INSERT INTO is_payed (walletAddress, payed) VALUES (?, 1)", (walletAddress,))
+
         conn.commit()
 
         if cursor.rowcount > 0:
