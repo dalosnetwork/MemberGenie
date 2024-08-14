@@ -72,7 +72,7 @@ const Panel = () => {
     try {
       const data = await isPayed(wallet);
       console.log(data);
-      if (data === false) {
+      if (data === true) {
         handleCheckSystemWallet();
         setBlur(false);
       } else {
