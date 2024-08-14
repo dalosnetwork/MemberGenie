@@ -19,13 +19,15 @@ const Decks = () => {
   const [isModalOpen, setModalOpen] = useState(false);
  
   const { wallet, status, error } = useSelector((state) => state.wallet);
-
+  
   const connectWallet = async () => {
-    sessionStorage.setItem("blur", true)
     dispatch(getWalletAdress());
     navigate("/panel")
   };
-
+  
+  useEffect(()=>{
+    sessionStorage.setItem("blur", true)
+  },[])
   useEffect(() => {
     if (status === 'succeeded' && wallet) {
       console.log('Wallet connected:', wallet);
