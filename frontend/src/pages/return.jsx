@@ -20,7 +20,6 @@ const Return = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { wallet } = useSelector((state) => state.wallet);
-  const address = sessionStorage.setItem("temp")
   
   const handlePaymentDone = async () => {
     try {
